@@ -58,7 +58,7 @@ class Email extends React.Component {
     //Email
     if (!fields["email"]) {
       formIsValid = false;
-      errors["email"] = "Email Field not to be empty";
+      errors["email"] = "Please Provide an Email";
     }
 
     if (typeof fields["email"] !== "undefined") {
@@ -82,13 +82,13 @@ class Email extends React.Component {
     //Password
     if (!fields["name"]) {
       formIsValid = false;
-      errors["name"] = "Name field should not be empty";
+      errors["name"] = "Please Provide Name";
     }
 
     //Message
     if (!fields["message"]) {
       formIsValid = false;
-      errors["message"] = "Message field should not be empty";
+      errors["message"] = "Please Provide Message";
     }
 
     this.setState({ errors: errors });
@@ -102,21 +102,11 @@ class Email extends React.Component {
     if (this.handleValidation()) {
       this.setState({ loading: true });
       let selff = this;
-      // let config = {
-      //   headers: {
-      //     "Access-Control-Allow-Origin": "*",
-      //     "Access-Control-Allow-Credentials": true,
-      //   },
-      // };
       axios
         .request({
           url:
             "https://1vwhr4lewg.execute-api.us-east-2.amazonaws.com/RestApi1",
           method: "post",
-          // headers: {
-          //   "Access-Control-Allow-Origin": "*",
-          //   "Access-Control-Allow-Credentials": true,
-          // },
           data: {
             Subject: "Contact Us Form Data",
             Body: `Email = ${fields.email},Name = ${fields.name},Message = ${fields.message}`,
@@ -130,28 +120,6 @@ class Email extends React.Component {
           selff.setState({ loading: false });
           console.log(error);
         });
-      // axios
-      //   .post(
-      //     "https://vjzhx4fbn8.execute-api.us-west-2.amazonaws.com/RestAPI1",
-      //     {
-      //       headers: {
-      //         "Access-Control-Allow-Origin": "*",
-      //         "Access-Control-Allow-Credentials": true,
-      //       },
-      //     },
-      //     {
-      //       Subject: "Contact Us Form Data",
-      //       Body: `Email = ${fields.email},Name = ${fields.name},Message = ${fields.message}`,
-      //     }
-      //   )
-      // .then(function (response) {
-      //   selff.setState({ loading: false, success: true });
-      //   // console.log(response);
-      // })
-      // .catch(function (error) {
-      //   selff.setState({ loading: false });
-      //   console.log(error);
-      // });
     } else {
       return false;
     }
